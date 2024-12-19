@@ -36,10 +36,10 @@ public class PraticienController {
         return service.addPraticien(praticien);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     @ApiOperation(value = "Met à jour le praticien dans la liste.",response = String.class,tags = "UpdatePraticien")
-    public String updatePraticien(Praticien praticien) {
-        return service.updatePraticien(praticien);
+    public String updatePraticien(@PathVariable Long id,Praticien praticien) {
+        return service.updatePraticien(id,praticien);
     }
 
     @DeleteMapping("/delete/{id}")

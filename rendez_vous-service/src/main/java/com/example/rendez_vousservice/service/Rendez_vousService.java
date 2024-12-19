@@ -80,10 +80,14 @@ public class Rendez_vousService {
         rendezVousList.removeIf(x -> x.getId().equals(id));
         return "Rendez_vous supprimé";
     }
-    public String updateRendezVous(Rendez_vous rendezVous) {
-        int index = rendezVousList.indexOf(getRendezVousById(rendezVous.getId()));
-        rendezVousList.set(index, rendezVous);
-        return "Rendez_vous modifié";
+    public String updateRendezVous(Long id,Rendez_vous rendezVous) {
+        for (int i = 0; i < rendezVousList.size(); i++) {
+            if(rendezVousList.get(i).getId().equals(id)) {
+                rendezVousList.get(i).setId(rendezVous.getId());
+                return "Rendez_vous modifié";
+            }
+        }
+        return "Erreur lors de la modification";
     }
 
 

@@ -35,10 +35,10 @@ public class Rendez_VousController {
         return service.addRendezVous(rendezVous);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     @ApiOperation(value="Modification d'un rendez_vous", response = String.class, tags = "UpdateRendezVous")
-    public String updateRendezVous(Rendez_vous rendezVous) {
-        return service.updateRendezVous(rendezVous);
+    public String updateRendezVous(@PathVariable Long id, Rendez_vous rendezVous) {
+        return service.updateRendezVous(id,rendezVous);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -41,10 +41,14 @@ public class PraticienService {
         praticiens.add(praticien);
         return "Praticien added";
     }
-    public String updatePraticien(Praticien praticien) {
-        int index = praticiens.indexOf(praticien);
-        praticiens.set(index, praticien);
-        return "Praticien updated";
+    public String updatePraticien(Long id,Praticien praticien) {
+        for (int i = 0; i < praticiens.size(); i++) {
+            if(praticiens.get(i).getId().equals(id)){
+                praticiens.set(i, praticien);
+                return "Praticien Updated Successfully!";
+            }
+        }
+        return "Erreur lors de la mise à jour du praticien";
     }
     public String deletePraticien(Long id) {
         int index = praticiens.indexOf(id);

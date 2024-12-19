@@ -40,7 +40,7 @@ public class DossierMedicalController {
     }
 
     @PutMapping("/update")
-    @ApiOperation(value = "Mise à jour d'un dosiier médical", response = String.class, tags = "UpdateDossierMedical")
+    @ApiOperation(value = "Mise à jour d'un dossier médical", response = String.class, tags = "UpdateDossierMedical")
     public String updateDossierMedical(Dossier_medical dossierMedical) {
         return dossierMedicalService.updateDossier(dossierMedical);
     }
