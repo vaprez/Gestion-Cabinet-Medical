@@ -29,7 +29,7 @@ public class DossierMedicalController {
 
     @PostMapping("/add")
     @ApiOperation(value = "Creation d'un dossier medical", response = String.class, tags = "AddDossierMedical")
-    public String addDossierMedical(Dossier_medical dossierMedical) {
+    public String addDossierMedical(@RequestBody Dossier_medical dossierMedical) {
         return dossierMedicalService.addDossier(dossierMedical);
     }
 
@@ -41,7 +41,7 @@ public class DossierMedicalController {
 
     @PutMapping("/update")
     @ApiOperation(value = "Mise à jour d'un dossier médical", response = String.class, tags = "UpdateDossierMedical")
-    public String updateDossierMedical(Dossier_medical dossierMedical) {
+    public String updateDossierMedical(@RequestBody Dossier_medical dossierMedical) {
         return dossierMedicalService.updateDossier(dossierMedical);
     }
 }
