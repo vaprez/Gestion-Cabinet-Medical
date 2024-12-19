@@ -2,7 +2,6 @@ package com.example.patientservice.service;
 
 
 import com.example.patientservice.Beans.Consultation;
-import com.example.patientservice.Beans.Doctor;
 import com.example.patientservice.Beans.Patient;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +12,6 @@ import java.util.Optional;
 
 @Service
 public class PatientService {
-
-    // Liste des docteurs
-    private List<Doctor> doctors = new ArrayList<>(Arrays.asList(
-            new Doctor(1L, "Dr. Smith", "Cardiology"),
-            new Doctor(2L, "Dr. Brown", "Pulmonology"),
-            new Doctor(3L, "Dr. Taylor", "Endocrinology")
-    ));
 
     // Liste des consultations
     private List<Consultation> consultations = new ArrayList<>(Arrays.asList(
@@ -36,9 +28,6 @@ public class PatientService {
 
     public List<Patient> getAllPatients() {
         return patients;
-    }
-    public List<Doctor> getDoctors() {
-        return doctors;
     }
     public List<Consultation> getConsultations() {
         return consultations;
