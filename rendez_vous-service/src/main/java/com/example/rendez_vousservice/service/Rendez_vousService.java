@@ -105,6 +105,7 @@ public class Rendez_vousService {
     @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     public String generateGoogleCalendarLink(String eventTitle, String startDateTime, String endDateTime,
                                              String description, String location) throws UnsupportedEncodingException {
+        System.out.print("val" +startDateTime+ "second" +endDateTime);
         String startUtc = convertToUTC(startDateTime);
         String endUtc = convertToUTC(endDateTime);
 
@@ -149,6 +150,7 @@ public class Rendez_vousService {
 
     public String addRendezVous(Rendez_vous rendezVous) {
         try {
+            System.out.print(rendezVous);
             rendezVousList.add(rendezVous); // Ajouter le rendez-vous à la liste locale
             // Générer le lien Google Calendar
             String googleCalendarLink = generateGoogleCalendarLink(

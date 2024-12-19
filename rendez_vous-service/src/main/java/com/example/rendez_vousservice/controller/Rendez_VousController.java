@@ -31,13 +31,13 @@ public class Rendez_VousController {
 
     @PostMapping("/add")
     @ApiOperation(value = "Prise de rendez_vous", response = String.class, tags = "AddRendezVous")
-    public String addRendezVous(Rendez_vous rendezVous) {
+    public String addRendezVous(@RequestBody Rendez_vous rendezVous) {
         return service.addRendezVous(rendezVous);
     }
 
     @PutMapping("/update/{id}")
     @ApiOperation(value="Modification d'un rendez_vous", response = String.class, tags = "UpdateRendezVous")
-    public String updateRendezVous(@PathVariable Long id, Rendez_vous rendezVous) {
+    public String updateRendezVous(@PathVariable Long id, @RequestBody Rendez_vous rendezVous) {
         return service.updateRendezVous(id,rendezVous);
     }
 
