@@ -17,8 +17,6 @@ public class PraticienController {
 
     @Autowired
     private PraticienService service;
-    @Autowired
-    private PraticienService praticienService;
 
     @GetMapping
     @ApiOperation(value = "Renvoie une liste de tous les praticiens.",response = List.class,tags = "GetAllPraticien")
@@ -53,7 +51,7 @@ public class PraticienController {
     @GetMapping("/consultation")
     @ApiOperation(value = "Liste de toute les consultations",response = List.class,tags = "GetConsultations")
     public List<Consultation> getConsultations() {
-        return praticienService.getConsultations();
+        return service.getConsultations();
     }
 
 
