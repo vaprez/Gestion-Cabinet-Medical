@@ -32,13 +32,13 @@ public class PraticienController {
 
     @PostMapping("/add")
     @ApiOperation(value = "Ajoute un nouveau praticien dans la liste.",response = String.class,tags = "AddPraticien")
-    public String addPraticien(Praticien praticien) {
+    public String addPraticien(@RequestBody Praticien praticien) {
         return service.addPraticien(praticien);
     }
 
     @PutMapping("/update/{id}")
     @ApiOperation(value = "Met à jour le praticien dans la liste.",response = String.class,tags = "UpdatePraticien")
-    public String updatePraticien(@PathVariable Long id,Praticien praticien) {
+    public String updatePraticien(@PathVariable Long id, @RequestBody Praticien praticien) {
         return service.updatePraticien(id,praticien);
     }
 
