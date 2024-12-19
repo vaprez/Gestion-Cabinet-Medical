@@ -4,6 +4,7 @@ import com.example.gatewayservice.beans.Dossier_medical;
 import com.example.gatewayservice.beans.Patient;
 import com.example.gatewayservice.beans.Praticien;
 import com.example.gatewayservice.beans.Rendez_vous;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class GatewayServiceController {
         return "Erreur lors de l'appel de la fonction veuillez ressayer plus tard";
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value ="/api/patients", method = RequestMethod.GET)
     @ApiOperation(value = "Liste de tous les patients", response = String.class, tags = "AllPatients")
     public String getPatients() {
@@ -38,6 +41,8 @@ public class GatewayServiceController {
         return "Liste des patients : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/praticien", method = RequestMethod.GET)
     @ApiOperation(value = "Liste de tous les praticiens", response = String.class, tags = "AllPraticiens")
     public String getPraticiens() {
@@ -49,6 +54,8 @@ public class GatewayServiceController {
         return "Liste des praticiens : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/dossiermedical",method = RequestMethod.GET)
     @ApiOperation(value = "Liste de tous les dossiers", response = String.class, tags = "AllDossiers")
     public String getDossierMedical() {
@@ -60,6 +67,8 @@ public class GatewayServiceController {
         return "Liste des dossiers : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "api/rendezvous", method = RequestMethod.GET)
     @ApiOperation(value = "Liste de tous les rendez-vous", response = String.class, tags = "AllRendezVous")
     public String getRendezVous() {
@@ -70,6 +79,8 @@ public class GatewayServiceController {
         return "Liste des rendez-vous : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value ="/api/patients/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "Informations sur un patient", response = String.class, tags = "Patient")
     public String getPatientById(@PathVariable int id) {
@@ -81,6 +92,8 @@ public class GatewayServiceController {
         return "Informations détaillés du patient" + id + " : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value ="/api/praticien/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "Informations sur un praticien", response = String.class, tags = "Praticien")
     public String getPraticienById(@PathVariable int id) {
@@ -92,6 +105,8 @@ public class GatewayServiceController {
         return "Informations détaillés du praticien" + id + " : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/dossiermedical/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "Informations d'un dossier medical", response = String.class, tags = "DossierMedical")
     public String getDossierMedicalById(@PathVariable int id) {
@@ -101,6 +116,8 @@ public class GatewayServiceController {
         return "Informations détaillés du dossier" + id + " : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/rendezvous/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "Informations d'un rendez-vous", response = String.class, tags = "RendezVous")
     public String getRendezVousById(@PathVariable int id) {
@@ -110,6 +127,8 @@ public class GatewayServiceController {
         return "Informations détaillés du rendez-vous" + id + " :" + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/patients/add", method = RequestMethod.POST)
     @ApiOperation(value = "Ajout d'un nouveau patient", response = String.class, tags = "AddPatient")
     public String addPatient(@RequestBody Patient patient) {
@@ -123,6 +142,9 @@ public class GatewayServiceController {
 
         return "Réponse du service patient : " + response;
     }
+
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/praticien/add", method = RequestMethod.POST)
     @ApiOperation(value = "Ajout d'un nouveau praticien", response = String.class, tags = "AddPraticien")
     public String addPraticien(@RequestBody Praticien praticien) {
@@ -137,6 +159,8 @@ public class GatewayServiceController {
         return "Réponse du service Praticien : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/dossiermedical/add", method = RequestMethod.POST)
     @ApiOperation(value = "Creation d'un dossier medical", response = String.class, tags = "AddDossierMedical")
     public String addDossierMedical(@RequestBody Dossier_medical dossierMedical) {
@@ -151,6 +175,8 @@ public class GatewayServiceController {
         return "Réponse du service Dossier Médical : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/rendezvous/add", method = RequestMethod.POST)
     @ApiOperation(value = "Ajout d'un nouveau rendez-vous", response = String.class, tags = "AddRendezVous")
     public String addRendezVous(@RequestBody Rendez_vous rendezVous) {
@@ -165,6 +191,8 @@ public class GatewayServiceController {
         return "Réponse du service RendezVous : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/patients/update/{id}", method = RequestMethod.PUT)
     @ApiOperation(value = "Modification des informations d'un patient", response = String.class, tags = "UpdatePatient")
     public String updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
@@ -183,6 +211,8 @@ public class GatewayServiceController {
         }
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/praticien/update/{id}", method = RequestMethod.PUT)
     @ApiOperation(value = "Modification des informations d'un praticien", response = String.class, tags = "UpdatePraticien")
     public String updatePraticien(@PathVariable Long id, @RequestBody Praticien praticien) {
@@ -199,6 +229,8 @@ public class GatewayServiceController {
         }
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/dossiermedical/update{id}", method = RequestMethod.PUT)
     @ApiOperation(value = "Modification d'un dossier medical", response = String.class, tags = "UpdateDossierMedical")
     public String updateDossierMedical(@PathVariable Long id, @RequestBody Dossier_medical dossierMedical) {
@@ -215,6 +247,8 @@ public class GatewayServiceController {
         }
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/rendezvous/update/{id}", method = RequestMethod.PUT)
     @ApiOperation(value = "Modification d'un rendez-vous", response = String.class, tags = "UpdateRendezVous")
     public String updateRendezVous(@PathVariable Long id, @RequestBody Rendez_vous rendezVous) {
@@ -231,6 +265,8 @@ public class GatewayServiceController {
         }
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/patients/delete/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "Suppression d'un patient", response = String.class, tags = "DeletePatient")
     public String deletePatient(@PathVariable Long id) {
@@ -247,6 +283,8 @@ public class GatewayServiceController {
         }
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/praticien/delete/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "Suppression d'un praticien", response = String.class, tags = "DeletePraticien")
     public String deletePraticien(@PathVariable Long id) {
@@ -263,6 +301,8 @@ public class GatewayServiceController {
         }
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/dossiermedical/delete/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "Suppression d'un dossier medical", response = String.class, tags = "DeleteDossierMedical")
     public String deleteDossierMedical(@PathVariable Long id) {
@@ -279,6 +319,8 @@ public class GatewayServiceController {
         }
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/rendezvous/delete/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "Suppression d'un rendez-vous", response = String.class, tags = "DeleteRendezVous")
     public String deleteRendezVous(@PathVariable Long id) {
@@ -295,6 +337,8 @@ public class GatewayServiceController {
         }
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/patients/consultaion", method = RequestMethod.GET)
     @ApiOperation(value = "Liste des consultations vue du patient", response = String.class, tags = "AllConsultationPatients")
     public String getConsultation() {
@@ -308,6 +352,8 @@ public class GatewayServiceController {
         return "Liste des consultations : " + response;
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallbackForRemoteCall")
     @RequestMapping(value = "/api/praticien/consultaion", method = RequestMethod.GET)
     @ApiOperation(value = "Liste des consultations vue du praticien", response = String.class, tags = "AllConsultationPraticiens")
     public String getConsultationPraticien() {
